@@ -1,3 +1,4 @@
+import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 
@@ -72,8 +73,11 @@ def getFactors( value ):
 
 
 
-print("Enter the file to generate a histogram for: ");
+print("Enter the file to generate a histogram of factors for: ");
 file = input();
+
+print("Enter the maximum value for the length of the cipher: ")
+maxValue = int(input());
 
 fileObj = open(file, 'r');
 text = fileObj.read();
@@ -84,6 +88,7 @@ displacements = getDistances(text, 3);
 
 factors = getAllFactors(displacements);
 
-plt.hist(factors, bins='auto');
+plt.hist(factors, bins=np.arange(maxValue+ 1) + 0.5, range=[1,maxValue + 1]);
+plt.xticks(range(1,maxValue + 1));
 
 plt.show();
