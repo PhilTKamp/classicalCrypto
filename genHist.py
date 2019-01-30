@@ -1,4 +1,5 @@
 import matplotlib
+import matplotlib.pyplot as plt
 
 # Accepts the overall text, and the size of the substring to find repeated iterations of text
 # Returns a list of all distances between all duplicated substrings of size 'subStringSize'
@@ -81,8 +82,8 @@ print("Parsed text:", text);
 
 displacements = getDistances(text, 3);
 
-print("Distances: ", displacements);
-
 factors = getAllFactors(displacements);
 
-print("Factors of 14 are: ", factors);
+plt.hist(factors, bins='auto');
+
+plt.show();
