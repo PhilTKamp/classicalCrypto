@@ -1,8 +1,23 @@
 import matplotlib
 
-# Accepts the overall text, and the size of the substring to find repeated iterations fo text
-def getDistances( text, displacement ):
+# Accepts the overall text, and the size of the substring to find repeated iterations of text
+# Returns a list of all distances between all duplicated substrings of size 'subStringSize'
+def getDistances( text, subStringSize ):
 	distances = [];
+
+	finalIndex = len(text) - 2*subStringSize
+
+	# Steps through the overall text, pulling out subStringSize chunks and seeing if they're repeated
+	# if repeats are found
+	for i in range(0, finalIndex):
+		subString = text[i:i+subStringSize];
+		occurences = findAll(subString, text);
+		for j in range(0, len(occurences) - 2):
+			for k in range(0, len(occurences) - 1):
+				distances.append(occurences[k] - occurences[j]);
+
+	distances.sort();
+	return distances;
 
 
 # Accepts the substring, the overall text to find
