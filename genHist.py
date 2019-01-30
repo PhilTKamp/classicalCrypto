@@ -47,6 +47,29 @@ def findAll( substr, text ):
 
 	return indicies;
 
+# Accepts a list of values
+# Returns the list of every factor which exists for every number within that list
+def getAllFactors( values ):
+	factors = [];
+
+	for value in values:
+		factors.extend(getFactors(value));
+
+	return factors;
+
+# Accepts a singular value
+# Returns all factors of said number
+def getFactors( value ):
+	factors = [];
+
+	for i in range(1, value + 1):
+		if value % i == 0:
+			factors.append(i);
+
+	return factors;
+
+
+
 
 print("Enter the file to generate a histogram for: ");
 file = input();
@@ -59,3 +82,7 @@ print("Parsed text:", text);
 displacements = getDistances(text, 3);
 
 print("Distances: ", displacements);
+
+factors = getAllFactors(displacements);
+
+print("Factors of 14 are: ", factors);
