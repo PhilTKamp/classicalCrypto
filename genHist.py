@@ -5,16 +5,17 @@ import matplotlib
 def getDistances( text, subStringSize ):
 	distances = [];
 
-	finalIndex = len(text) - 2*subStringSize
+	finalIndex = len(text) - 2*subStringSize;
 
 	# Steps through the overall text, pulling out subStringSize chunks and seeing if they're repeated
 	# if repeats are found
 	for i in range(0, finalIndex):
 		subString = text[i:i+subStringSize];
 		occurences = findAll(subString, text);
-		for j in range(0, len(occurences) - 2):
-			for k in range(0, len(occurences) - 1):
-				distances.append(occurences[k] - occurences[j]);
+		if(len(occurences) > 1):
+			for j in range(0, len(occurences) - 1):
+				for k in range(1, len(occurences)):
+					distances.append(occurences[k] - occurences[j]);
 
 	distances.sort();
 	return distances;
@@ -35,12 +36,14 @@ def findAll( substr, text ):
 	# The point where we start our search, first index + the length of the substring to avoid overlap
 	startSearch = indicies[0] + len(substr);
 
+
 	# While we keep finding matches, keep searching and moving th starting point forward
 	while(text.find(substr, startSearch) != -1):
 
 		# Adds the next found index to our list and gets a new point to start the search from
-		indicies.append(text.find(substr, start));
+		indicies.append(text.find(substr, startSearch));
 		startSearch = indicies[len(indicies) - 1] + len(substr);
+
 
 	return indicies;
 
@@ -51,4 +54,8 @@ file = input();
 fileObj = open(file, 'r');
 text = fileObj.read();
 
-print(text);
+print("Parsed text:", text);
+
+displacements = getDistances(text, 3);
+
+print("Distances: ", displacements);
