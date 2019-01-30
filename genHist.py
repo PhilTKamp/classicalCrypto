@@ -1,6 +1,4 @@
-import pandas
 import matplotlib
-from collections import Counter
 
 # Accepts the overall text, and the size of the substring to find repeated iterations fo text
 def getDistances( text, displacement ):
