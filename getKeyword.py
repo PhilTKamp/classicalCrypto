@@ -9,10 +9,27 @@ def createCoSets(text, keyLength):
 
 	return cosets;
 
+# Accepts a string of text and the value to shift the text forwards or backwads by
+# Returns the string of text after being shifted
+def shiftText( text, shift ):
+	alphabet = "abcdefghijklmnopqrstuvwxyz";
+	lowerText = text.lower()
+	shiftedText = "";
 
-test = "1234567123456712345671234567";
+	for character in text:
+		shiftedText.append()
 
-cosets = createCoSets(test, 7);
+
+print("Enter the file of ciphertext to generate the cosets and keyword for: ");
+fileName = input();
+
+print("Enter the length of the keyword: ")
+keyLength = int(input());
+
+file = open(fileName, 'r');
+cipherText = file.read();
+
+cosets = createCoSets(cipherText, keyLength);
 
 for coset in cosets:
-	print(coset);
+	print( coset );
