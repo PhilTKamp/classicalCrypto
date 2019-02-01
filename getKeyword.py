@@ -50,6 +50,8 @@ def getXSquaredDiff( charStatistics ):
 		return IC - num / ( den * ( den - 1 ));
 
 
+alphabet = "abcdefghijklmnopqstuvwxyz";
+
 print("Enter the file of ciphertext to generate the cosets and keyword for: ");
 fileName = input();
 
