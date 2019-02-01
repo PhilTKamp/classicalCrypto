@@ -29,7 +29,10 @@ def shiftText( text, shift, alphabet ):
 # character within that string
 def getCharStats( text, alphabet ):
 	charStats = [];
+	for character in alphabet:
+		charStats.append(double(text.count(character)) / len(text));
 
+	return charStats;
 
 # Accepts an array of doubles/floats which correlate to the frequencies of characters appearing
 # Returns the difference between the X2 calculated and the X2 of the English language (AKA the IC)
