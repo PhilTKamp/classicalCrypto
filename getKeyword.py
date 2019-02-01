@@ -12,16 +12,27 @@ def createCoSets(text, keyLength):
 
 	return cosets;
 
-# Accepts a string of text and the value to shift the text forwards or backwads by
+# Accepts a string of text and the value to shift the text forwards or backwards by, and the current alphabet
 # Returns the string of text after being shifted
-def shiftText( text, shift ):
-	alphabet = "abcdefghijklmnopqrstuvwxyz";
+def shiftText( text, shift, alphabet ):
 	lowerText = text.lower()
 	shiftedText = "";
 
 	for character in text:
-		shiftedText.append()
+		# Finds the index of the character in the alphabet and adds the shift, modding to not overstep
+		shiftedText.append(alphabet[(alphabet.find(character) + shift) % len(alphabet)]);
 
+	return shiftedText;
+
+# Accepts a string of characters, and the alphabet to compare the characters to
+# Returns a list correlating to the rates of appearance of each alphabetic 
+# character within that string
+def getCharStats( text, alphabet ):
+	charStats = [];
+
+
+# Accepts an array of doubles/floats which correlate to the frequencies of characters appearing
+# Returns the difference between the X2 calculated and the X2 of the English language (AKA the IC)
 def getXSquaredDiff( charStatistics ):
 	num = 0.0;
 	den = 0.0;
