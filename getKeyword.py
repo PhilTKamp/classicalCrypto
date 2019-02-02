@@ -17,7 +17,7 @@ def shiftText( text, shift, alphabet ):
 
 	for character in text:
 		# Finds the index of the character in the alphabet and adds the shift, modding to not overstep
-		shiftedText.append(alphabet[(alphabet.find(character) + shift) % len(alphabet)]);
+		shiftedText += alphabet[(alphabet.find(character) + shift) % len(alphabet)];
 
 	return shiftedText;
 
@@ -28,7 +28,7 @@ def getCharStats( text, alphabet ):
 	charStats = [];
 	lowerText = text.lower()
 	for character in alphabet:
-		charStats.append(double(lowerText.count(character)) / len(lowerText));
+		charStats.append(float(lowerText.count(character)) / len(lowerText));
 
 	return charStats;
 
@@ -42,17 +42,17 @@ def getXSquaredDiff( charStatistics ):
 		i = stat
 		num += stat*(stat-1);
 		den += stat;
-	if ( den == 0.0):
+	if ( den == 0.0 or den == 1):
 		return 0.0;
 	else:
-		return IC - num / ( den * ( den - 1 ));
+		return abs(IC - num / ( den * ( den - 1 )));
 
 def getCosetCharICList(coset, alphabet):
 	cosetCharICList = [];
 	for i in range(len(alphabet)):
 		currShift = shiftText(coset, i, alphabet);
 		currShiftStats = getCharStats(currShift, alphabet);
-		cosetCharIC.append(getXSquaredDiff(currShiftStats));
+		cosetCharICList.append(getXSquaredDiff(currShiftStats));
 
 	return cosetCharICList
 
@@ -73,6 +73,14 @@ cosets = createCoSets(cipherText, keyLength);
 cosetsCharICLists = [];
 
 for coset in cosets:
-	cosetsCharICLists.append(getCosetCharICLst(coset, alphabet));
+	cosetsCharICLists.append(getCosetCharICList(coset, alphabet));
 
+for cosetCharICList in cosetsCharICLists:
+	# Find the minimum for all of the IC's of the current coset This is your offset, Find the index of the minimum
+	index = cosetCharICList.index(min(cosetCharICList))
+	print(cosetCharICList);
+	# The index of the minimum correlates to the index of the keyword character
+	keyword += alphabet[index];
+
+print("Calculated Keyword: ", keyword);
 
