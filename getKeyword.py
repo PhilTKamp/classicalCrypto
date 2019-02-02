@@ -1,6 +1,3 @@
-#alphabet = [ 0.0815, 0.0144, 0.0276, 0.0379, 0.1311, 0.0292, 0.0199, 0.0526, 0.0635, 0.0013, 0.0042, 0.0339, 0.254, 0.071, 0.08, 0.0198, 0.0012, 0.0683, 0.061, 0.1047, 0.0246, 0.0092, 0.0154, 0.0017, 0.0198, 0.0008 ]
-
-
 # Accepts a string of text and the keyLength to divide that string upon
 # Returns a 2D list where each 1D list is the coset of the original text
 def createCoSets(text, keyLength):
@@ -50,8 +47,18 @@ def getXSquaredDiff( charStatistics ):
 	else:
 		return IC - num / ( den * ( den - 1 ));
 
+def getCosetCharICList(coset, alphabet):
+	cosetCharICList = [];
+	for i in range(len(alphabet)):
+		currShift = shiftText(coset, i, alphabet);
+		currShiftStats = getCharStats(currShift, alphabet);
+		cosetCharIC.append(getXSquaredDiff(currShiftStats));
+
+	return cosetCharICList
 
 alphabet = "abcdefghijklmnopqstuvwxyz";
+keyword = "";
+
 
 print("Enter the file of ciphertext to generate the cosets and keyword for: ");
 fileName = input();
@@ -63,6 +70,9 @@ file = open(fileName, 'r');
 cipherText = file.read();
 
 cosets = createCoSets(cipherText, keyLength);
+cosetsCharICLists = [];
 
 for coset in cosets:
-	print( coset );
+	cosetsCharICLists.append(getCosetCharICLst(coset, alphabet));
+
+
